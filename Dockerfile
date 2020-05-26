@@ -24,3 +24,4 @@ RUN mkdir -p grpc/cmake/build && \
 	make -j4 && \
 	make install && \
 	cd ../../..
+RUN rm -r grpc
