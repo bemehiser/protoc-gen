@@ -18,8 +18,9 @@ RUN curl -o /usr/local/bin/protoc-gen-grpc-java https://repo1.maven.org/maven2/i
 # grpc cpp, python, ruby, csharp, node
 RUN git clone --recurse-submodules -b v1.28.1 https://github.com/grpc/grpc
 RUN apt install -y cmake
-RUN cd grpc && \
-	cmake -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr/local/bin && \
-	cmake --build . -- -j4 && \
-	cp grpc_cpp_plugin grpc_csharp_plugin grpc_node_plugin grpc_objective_c_plugin grpc_php_plugin grpc_python_plugin grpc_ruby_plugin /usr/local/bin && \
-	cd ..
+RUN mkdir -p grpc/cmake/build && \
+	cd grpc/cmake/build && \
+	cmake ../.. && \
+	make -j4 && \
+	make install && \
+	cd ../../..
