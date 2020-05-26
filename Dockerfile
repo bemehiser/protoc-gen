@@ -16,12 +16,12 @@ RUN curl -o /usr/local/bin/protoc-gen-grpc-java https://repo1.maven.org/maven2/i
 	chmod ugo+x /usr/local/bin/protoc-gen-grpc-java
 
 # grpc cpp, python, ruby, csharp, node
-RUN git clone --recurse-submodules -b v1.28.1 https://github.com/grpc/grpc
-RUN apt install -y cmake
-RUN mkdir -p grpc/cmake/build && \
+RUN git clone --recurse-submodules -b v1.28.1 https://github.com/grpc/grpc && \
+	apt install -y cmake && \
+	mkdir -p grpc/cmake/build && \
 	cd grpc/cmake/build && \
 	cmake ../.. && \
-	make -j4 && \
+	make && \
 	make install && \
-	cd ../../..
-RUN rm -r grpc
+	cd ../../.. && \
+	rm -r grpc
