@@ -25,3 +25,8 @@ RUN git clone --recurse-submodules -b v1.28.1 https://github.com/grpc/grpc && \
 	make install && \
 	cd ../../.. && \
 	rm -r grpc
+
+# zip
+RUN apt install -y \
+	zip
+
